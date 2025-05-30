@@ -6,9 +6,9 @@ OUTPUT_DIR := out
 OBJECTS_DIR := $(OUTPUT_DIR)/obj
 DEPS_DIR := $(OUTPUT_DIR)/dep
 
-DIFF_SCRIPT := scripts/diff.py
-GENERATE_LINKER_SCRIPT_SCRIPT := scripts/generate_linker_script.py
-GET_IGNORED_SYMBOLS_SCRIPT := scripts/get_ignored_symbols.py
+DIFF_SCRIPT := tools/diff.py
+GENERATE_LINKER_SCRIPT_SCRIPT := tools/generate_linker_script.py
+GET_IGNORED_SYMBOLS_SCRIPT := tools/get_ignored_symbols.py
 
 SOURCES := $(addprefix $(SOURCES_DIR)/,vector2.cpp flash_movie_clip.cpp flash_timeline.cpp matrix4x4.cpp)
 OBJECTS := $(patsubst src/%.cpp,$(OBJECTS_DIR)/%.o,$(SOURCES))
