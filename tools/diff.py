@@ -40,12 +40,13 @@ class ElfSymbol:
         section_index = elftools_symbol.entry["st_shndx"]
         if section_index == "SHN_UNDEF":
             self.section = None
-            self.absolute = True
+            self.absolute = False
         elif section_index == "SHN_ABS":
             self.section = None
-            self.absolute = False
+            self.absolute = True
         else:
             self.section = elf.sections[int(section_index)]
+            self.absolute = False
 
     def offset(self):
         if self.section is None:
@@ -74,6 +75,9 @@ def main():
     original_binary = Elf(open(arguments.original, "rb"))
 
     for compiled_symbol in sorted(compiled_binary.symbols, key=lambda s: s.address):
+        if compiled_symbol.offset() is None:
+            continue
+
         try:
             original_symbol = next(
                 s for s in original_binary.symbols if s.name == compiled_symbol.name
@@ -90,10 +94,6 @@ def main():
                 f"symbol {compiled_symbol.name} ({demangled_name}) not found in original binary"
             )
             sys.exit(1)
-
-        if compiled_symbol.offset() is None:
-            print(f"skipping {compiled_symbol}")
-            continue
 
         if compiled_symbol.address != original_symbol.address:
             print(f"address mismatch for symbol {original_symbol.name}")
