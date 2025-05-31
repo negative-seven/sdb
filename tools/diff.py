@@ -77,6 +77,9 @@ def main():
     for compiled_symbol in sorted(compiled_binary.symbols, key=lambda s: s.address):
         if compiled_symbol.offset() is None:
             continue
+        
+        if compiled_symbol.name.endswith('@GLIBC_2.2.5'):
+            continue
 
         try:
             original_symbol = next(
