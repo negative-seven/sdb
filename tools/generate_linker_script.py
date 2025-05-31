@@ -18,7 +18,7 @@ def main():
         with elftools.elf.elffile.ELFFile(open(object_file_name, "rb")) as object_file:
             for section in object_file.iter_sections():
                 if match := re.fullmatch(
-                    r"(.text|.rodata).(0x[0-9a-f]+)(?:.ignore_in_diff)?", section.name
+                    r"(.bss|.text).(0x[0-9a-f]+)(?:.ignore_in_diff)?", section.name
                 ):
                     base_section_name = match.group(1)
                     address = match.group(2)

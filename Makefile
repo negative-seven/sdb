@@ -10,7 +10,7 @@ DIFF_SCRIPT := tools/diff.py
 GENERATE_LINKER_SCRIPT_SCRIPT := tools/generate_linker_script.py
 GET_IGNORED_SYMBOLS_SCRIPT := tools/get_ignored_symbols.py
 
-SOURCES := $(addprefix $(SOURCES_DIR)/,error.cpp flash_movie_clip.cpp flash_timeline.cpp matrix4x4.cpp vector2.cpp)
+SOURCES := $(addprefix $(SOURCES_DIR)/,error.cpp flash_movie_clip.cpp flash_timeline.cpp matrix4x4.cpp system.cpp vector2.cpp)
 OBJECTS := $(patsubst src/%.cpp,$(OBJECTS_DIR)/%.o,$(SOURCES))
 DEPS := $(patsubst src/%.cpp,$(DEPS_DIR)/%.d,$(SOURCES))
 LINKER_SCRIPT_TEMPLATE := script.ld.template
