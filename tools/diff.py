@@ -4,6 +4,7 @@ import argparse
 import elftools.elf.elffile
 import iced_x86
 import itertools
+import re
 import subprocess
 import sys
 
@@ -77,8 +78,22 @@ def main():
     for compiled_symbol in sorted(compiled_binary.symbols, key=lambda s: s.address):
         if compiled_symbol.offset() is None:
             continue
-        
-        if compiled_symbol.name.endswith('@GLIBC_2.2.5'):
+
+        if any(
+            re.fullmatch(pattern, compiled_symbol.name)
+            for pattern in [
+                r"__.*",
+                r"_dl_relocate_static_pie",
+                r"_fini",
+                r"_init",
+                r"_IO_stdin_used",
+                r"_start",
+                r"completed.\d+",
+                r"dtor_idx.\d+",
+                r"frame_dummy",
+                r".*@GLIBC_2.2.5",
+            ]
+        ):
             continue
 
         try:

@@ -10,7 +10,7 @@ DIFF_SCRIPT := tools/diff.py
 GENERATE_LINKER_SCRIPT_SCRIPT := tools/generate_linker_script.py
 GET_IGNORED_SYMBOLS_SCRIPT := tools/get_ignored_symbols.py
 
-SOURCES := $(addprefix $(SOURCES_DIR)/,bounding_box.cpp critical_section.cpp error.cpp flash_movie_clip.cpp flash_timeline.cpp matrix4x4.cpp system.cpp vector2.cpp)
+SOURCES := $(addprefix $(SOURCES_DIR)/,bounding_box.cpp critical_section.cpp error.cpp flash_movie_clip.cpp flash_timeline.cpp main.cpp matrix4x4.cpp system.cpp vector2.cpp)
 OBJECTS := $(patsubst src/%.cpp,$(OBJECTS_DIR)/%.o,$(SOURCES))
 DEPS := $(patsubst src/%.cpp,$(DEPS_DIR)/%.d,$(SOURCES))
 LINKER_SCRIPT_TEMPLATE := script.ld.template
@@ -38,7 +38,7 @@ $(LINKER_SCRIPT): $(GENERATE_LINKER_SCRIPT_SCRIPT) $(LINKER_SCRIPT_TEMPLATE) $(O
 
 $(BINARY): $(OBJECTS) $(LINKER_SCRIPT) $(GET_IGNORED_SYMBOLS_SCRIPT)
 	mkdir -p $(dir $(BINARY))
-	ld -T $(LINKER_SCRIPT) $(OBJECTS) -o $(BINARY)
+	gcc-4.6 -T $(LINKER_SCRIPT) $(OBJECTS) -o $(BINARY)
 	strip $(BINARY) --strip-debug $(addprefix -N ,$(shell $(GET_IGNORED_SYMBOLS_SCRIPT) $(OBJECTS)))
 
 .PHONY: clean

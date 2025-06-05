@@ -8,6 +8,7 @@ SECTIONS
     .rodata.cst16 0x5be6f0 : { *(.rodata.cst16) }
     .dynamic 0x8153e8 : { *(.dynamic) }
     .got.plt 0x815628 : { *(.got.plt) }
+    .data 0x815e00 : { *(.data) }
 
     /DISCARD/ : {
         *(.interp)
