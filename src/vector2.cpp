@@ -30,7 +30,7 @@ Vector2 *Vector2::Perpendicular(Vector2 *param_1, Vector2 const *param_2,
 float Vector2::Length(Vector2 const *param_1) {
     float x_squared = param_1->x * param_1->x;
     float y_squared = param_1->y * param_1->y;
-    return sqrtf(y_squared + x_squared);
+    return sqrt(y_squared + x_squared);
 }
 
 float Vector2::LengthSq(Vector2 const *param_1) {
@@ -44,7 +44,7 @@ Vector2 *Vector2::Normalize(Vector2 *out, Vector2 const *in) {
     float y = in->y;
     float x_squared = x * x;
     float y_squared = y * y;
-    float scale = 1.0 / sqrtf(y_squared + x_squared);
+    float scale = 1.0f / sqrt(y_squared + x_squared);
     out->x = scale * x;
     out->y = scale * in->y;
     return out;

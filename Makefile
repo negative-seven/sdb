@@ -1,4 +1,4 @@
-CXXFLAGS = -O3 -ffinite-math-only -funsafe-math-optimizations -masm=intel \
+CXXFLAGS = -O3 -std=c++0x -ffinite-math-only -funsafe-math-optimizations -masm=intel \
 	-MMD -MT $@ -MF $(DEPS_DIR)/$*.d
 
 SOURCES_DIR := src
