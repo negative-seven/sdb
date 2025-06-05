@@ -8,8 +8,8 @@
 struct Matrix4x4 {
     float values[4][4];
 
-    TEXT_ADDRESS(0x5baf00) operator float *();
-    TEXT_ADDRESS(0x5baf00) operator float const *() const;
+    TEXT_ADDRESS(0x5baf00) explicit operator float *();
+    TEXT_ADDRESS(0x5baf00) explicit operator float const *() const;
     TEXT_ADDRESS(0x5baf00) float *operator[](int index);
     TEXT_ADDRESS(0x5baf00) float const *operator[](int index) const;
     TEXT_ADDRESS(0x5baf00) float *GetElement(unsigned char i, unsigned char j);
@@ -60,15 +60,15 @@ struct Matrix4x4 {
         Matrix4x4 *out, Vector2 const *scale, float const *rotation,
         Vector2 const *translation); // complex, unsure if correct
     TEXT_ADDRESS_IGNORE_IN_DIFF(0x5bc7a0)
-    Matrix4x4 *Transformation2DSkew(
+    static Matrix4x4 *Transformation2DSkew(
         Matrix4x4 *out, Vector2 const *scale, Vector2 const *rotation,
         Vector2 const *skew_maybe); // complex, unsure if correct
     TEXT_ADDRESS_IGNORE_IN_DIFF(0x5bc970)
-    void TransformVector2(Vector2 *out, Vector2 const *in,
-                          Matrix4x4 const *matrix,
-                          int include_translation); // complex
+    static void TransformVector2(Vector2 *out, Vector2 const *in,
+                                 Matrix4x4 const *matrix,
+                                 int include_translation); // complex
 };
 
 TEXT_ADDRESS_IGNORE_IN_DIFF(0x5bb3f0)
-float Mat4x4MinorDeterminant(FPUVector const &param_1, FPUVector const &param_2,
-                             FPUVector const &param_3);
+float Mat4x4MinorDeterminant(FPUVector const &a, FPUVector const &b,
+                             FPUVector const &c);

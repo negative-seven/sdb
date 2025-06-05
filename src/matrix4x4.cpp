@@ -45,11 +45,11 @@ int Matrix4x4::operator==(Matrix4x4 const &other) const {
           ((this->values[0][3] == other.values[0][3] &&
             (this->values[1][3] == other.values[1][3])))))) {
         if (this->values[2][3] == other.values[2][3]) {
-            return this->values[3][3] == other.values[3][3];
+            return static_cast<int>(this->values[3][3] == other.values[3][3]);
         }
-        return false;
+        return 0;
     }
-    return false;
+    return 0;
 }
 
 int Matrix4x4::operator!=(Matrix4x4 const &other) const {
@@ -575,10 +575,10 @@ Matrix4x4 *Matrix4x4::Transformation2DRot(Matrix4x4 *out, Vector2 const *scale,
     out->values[3][1] = 0.0;
 
     if (rotation != NULL) {
-        out->values[0][0] = (float)(cos(*rotation) * scale_x);
-        out->values[0][1] = (float)(sin(*rotation) * -scale_y);
-        out->values[1][0] = (float)(sin(*rotation) * scale_x);
-        out->values[1][1] = (float)(cos(*rotation) * scale_y);
+        out->values[0][0] = (cos(*rotation) * scale_x);
+        out->values[0][1] = (sin(*rotation) * -scale_y);
+        out->values[1][0] = (sin(*rotation) * scale_x);
+        out->values[1][1] = (cos(*rotation) * scale_y);
     }
 
     if (translation == (Vector2 *)0x0) {

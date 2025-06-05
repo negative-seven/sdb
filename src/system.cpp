@@ -10,7 +10,7 @@ extern "C" {
 int System_GetTimeInMS() {
     timeval time;
     gettimeofday(&time, NULL);
-    return time.tv_usec / 1000llu + time.tv_sec * 1000;
+    return time.tv_usec / 1000LLU + time.tv_sec * 1000;
 }
 
 void System_Startup() {}

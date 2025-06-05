@@ -42,7 +42,7 @@ Vector2 *Vector2::Normalize(Vector2 *out, Vector2 const *in) {
     float y = in->y;
     float x_squared = x * x;
     float y_squared = y * y;
-    float scale = 1.0f / sqrt(y_squared + x_squared);
+    float scale = 1.0F / sqrt(y_squared + x_squared);
     out->x = scale * x;
     out->y = scale * in->y;
     return out;
@@ -142,11 +142,11 @@ void Vector2::operator=(Vector2 const &other) {
 }
 
 int Vector2::operator==(Vector2 const &other) const {
-    return other.x == x && other.y == y;
+    return static_cast<int>(other.x == x && other.y == y);
 }
 
 int Vector2::operator!=(Vector2 const &other) const {
-    return other.x != x || other.y != y;
+    return static_cast<int>(other.x != x || other.y != y);
 }
 
 Vector2::operator float *() { return &x; }

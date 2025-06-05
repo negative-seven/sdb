@@ -11,7 +11,6 @@ FlashMovieClip::FlashMovieClip() {
     unknown_0x2c = 0;
     unknown_0x30 = 0;
     unknown_0x10 = 1;
-    return;
 }
 
 int FlashMovieClip::IsPlaying() { return this->playing; }

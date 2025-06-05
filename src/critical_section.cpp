@@ -15,9 +15,8 @@ int CriticalSection::Lock(int blocking) {
     if (blocking == 1) {
         pthread_mutex_lock(&mutex);
         return 1;
-    } else {
-        return pthread_mutex_trylock(&mutex) == 0;
     }
+    return pthread_mutex_trylock(&mutex) == 0;
 }
 
 void CriticalSection::Unlock() { pthread_mutex_unlock(&mutex); }
