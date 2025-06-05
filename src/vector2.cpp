@@ -2,8 +2,6 @@
 
 #include "vector2.h"
 
-Vector2::~Vector2() {}
-
 float Vector2::Dot(Vector2 const *left, Vector2 const *right) {
     float x_product = left->x * right->x;
     float y_product = left->y * right->y;

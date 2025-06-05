@@ -7,7 +7,7 @@ struct Vector2 {
     float y;
 
     TEXT_ADDRESS(0x4736b0)
-    ~Vector2();
+    inline ~Vector2() {}
     TEXT_ADDRESS(0x5be000)
     static float Dot(Vector2 const *left, Vector2 const *right);
     TEXT_ADDRESS(0x5be000)
