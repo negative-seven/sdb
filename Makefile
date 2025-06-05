@@ -26,7 +26,7 @@ $(OBJECTS_DIR) $(DEPS_DIR):
 	mkdir -p $@
 
 $(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.cpp | $(OBJECTS_DIR) $(DEPS_DIR)
-	gcc-4.6 -c $< $(CXXFLAGS) -o $@
+	g++-4.6 -c $< $(CXXFLAGS) -o $@
 
 include $(wildcard $(DEPS))
 
@@ -38,7 +38,7 @@ $(LINKER_SCRIPT): $(GENERATE_LINKER_SCRIPT_SCRIPT) $(LINKER_SCRIPT_TEMPLATE) $(O
 
 $(BINARY): $(OBJECTS) $(LINKER_SCRIPT) $(GET_IGNORED_SYMBOLS_SCRIPT)
 	mkdir -p $(dir $(BINARY))
-	gcc-4.6 -T $(LINKER_SCRIPT) $(OBJECTS) -o $(BINARY)
+	g++-4.6 -T $(LINKER_SCRIPT) $(OBJECTS) -o $(BINARY)
 	strip $(BINARY) --strip-debug $(addprefix -N ,$(shell $(GET_IGNORED_SYMBOLS_SCRIPT) $(OBJECTS)))
 
 .PHONY: clean
