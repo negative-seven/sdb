@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <cwchar>
 
+char *strLargeString;
+
 size_t safe_wcslen(wchar_t const *string) {
     const wchar_t *string_end = string;
     wchar_t character;
@@ -27,20 +29,18 @@ void DebugMsg(const char *format...) {
     va_end(arguments);
 }
 
-void Sprint(char *buffer, const char *format...) {
+void Sprint(const char *format, char *buffer...) {
     va_list arguments;
-    va_start(arguments, format);
+    va_start(arguments, buffer);
     SprintArgList(format, buffer, arguments);
     va_end(arguments);
 }
 
-void SprintArgList(const char *format, char *buffer, // NOLINT
-                   va_list arguments) {
+void SprintArgList(const char *format, char *buffer, va_list arguments) {
     if (buffer == nullptr) {
-        buffer = reinterpret_cast<char *>(0x824d00);
+        buffer = strLargeString;
     }
-    // TODO
-    // vsprintf(buffer, format, arguments);
+    vsprintf(buffer, format, arguments);
 }
 
 void SprintW(wchar_t *param_9, wchar_t *buffer, const wchar_t *format...) {
