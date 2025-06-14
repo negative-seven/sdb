@@ -22,10 +22,9 @@ ORIGINAL_BINARY ?= SuperMeatBoy
 .PHONY: all
 all: $(BINARY)
 
-$(OBJECTS_DIR) $(DEPS_DIR):
-	mkdir -p $@
-
-$(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.cpp | $(OBJECTS_DIR) $(DEPS_DIR)
+$(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.cpp
+	mkdir -p $(dir $(DEPS_DIR)/$*.d)
+	mkdir -p $(dir $(OBJECTS_DIR)/$*.d)
 	g++-4.6 -c $< $(CXXFLAGS) -o $@
 
 include $(wildcard $(DEPS))
